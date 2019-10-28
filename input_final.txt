@@ -1,0 +1,88 @@
+op|parts
+op10|AA
+op20|op10
+op30|op20
+op40|op30
+Assy1|op40 AB AC AD
+op50|op40 AB AC AD Assy1
+op60|op50
+op70|op60
+op80|op70
+op90|op80
+op100|op90
+op110|op100
+op120|op110
+op130|op120
+Assy2|op130 AE AF AG AH AI AJ
+op140|op130 AE AF AG AH AI AJ Assy2
+op150|op140
+op160|op150
+op170|op160
+op180|op170
+op190|op180
+op200|A B
+op210|C D
+op220|E F
+op230|G
+op240|op230
+op250|op240 H
+op260|op250
+op270|op260
+op280|op200 op210 op220
+op290|I
+Assy3|op290 op280 J K L M N
+op300|op290 op280 J K L M N Assy3
+op310|op300
+op320|op310
+op330|op320
+Assy4|op330 O P Q R S
+op340|op330 O P Q R S Assy4
+op350|op340
+op360|op350
+op370|op360
+op380|op370
+op390|op380
+op400|op390
+op410|T
+op420|op410
+op430|U
+op440|op430
+op450|U
+op460|op450
+op470|V
+op480|op470
+op490|op480
+op500|W
+op510|op500
+op520|op510
+Assy5|op420 op440 op460 BA BB BC BD BE BF BG BH
+op530|op420 op440 op460 BA BB BC BD BE BF BG BH Assy5
+op540|op530
+op550|op540
+Assy6|op490 op520 op550 op190 BE BF BG BH BI op190
+op560|op490 op520 op550 op190 BE BF BG BH BI op190 Assy6
+op570|op560
+op580|op570
+op590|op580
+op600|op590
+op610|op600
+op620|op610
+op630|op620
+op640|op630
+op650|op640
+op660|op650
+Assy7|op660 op400 BJ BK
+op670|op660 op400 BJ BK Assy7
+op680|op670
+op690|op680
+op700|op690
+op710|op700
+op720|op710
+op730|op720
+op740|op660 op400 BJ BK Assy7
+op750|op740
+op760|op750
+op770|op760
+op780|op770
+op790|op780
+Z|790

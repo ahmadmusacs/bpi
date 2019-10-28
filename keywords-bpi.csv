@@ -1,0 +1,104 @@
+Operations,Keywords
+op10,"human, investigation"
+op20,"training, standardization"
+op30,"human, supplier, feedback"
+op40,"Preventive, material"
+op50,"human, supplier, feedback"
+op60,"Preventive, material"
+op70,"human, investigation"
+op80,"preventive, material"
+op90,machine
+op100,"training, standardization"
+op110,"Preventive, material"
+op120,"human, investigation"
+op130,machine
+op140,"human, supplier, feedback"
+op150,machine
+op160,"training, standardization"
+op170,"Preventive, material"
+op180,"human, investigation"
+op190,"human, supplier, feedback"
+op200,machine
+op210,"human, supplier, feedback"
+op220,"human, supplier, feedback"
+op230,machine
+op240,"human, supplier, feedback"
+op250,"human, supplier, feedback"
+op260,"Preventive, material"
+op270,"training, standardization"
+op280,"training, standardization"
+op290,"human, supplier, feedback"
+op300,"human, supplier, feedback"
+op310,machine
+op320,"human, investigation"
+op330,machine
+op340,"human, supplier, feedback"
+op350,"fixture, training, supervision"
+op360,"fixture, training, supervision"
+op370,"fixture, training, supervision"
+op380,"Preventive, material"
+op390,"Preventive, material"
+op400,"Preventive, material"
+op410,"human, supplier, feedback"
+op420,"human, investigation"
+op430,"human, supplier, feedback"
+op440,automation
+op450,"human, supplier, feedback"
+op460,"human, investigation"
+op470,"human, supplier, feedback"
+op480,"human, investigation"
+op490,"Preventive, material"
+op500,"Preventive, material"
+op510,"human, supplier, feedback"
+op520,"training, standardization"
+op530,"human, supplier, feedback"
+op540,automation
+op550,"human, supplier, feedback"
+op560,yield
+op570,"human, supplier, feedback"
+op580,"training, standardization"
+op590,data
+op600,data
+op610,data
+op620,yield
+op630,automation
+op640,automation
+op650,"human, investigation"
+op660,yield
+op670,"human, supplier, feedback"
+op680,"human, feedback"
+op690,"human, feedback"
+op700,automation
+op710,"training, standardization"
+op720,automation
+op730,automation
+op740,"human, supplier, feedback"
+op750,"training, standardization"
+op760,"training, standardization"
+op770,automation
+op780,automation
+op790,"human, investigation"
+Assy1,Supervision
+Assy2,"fixture, training, supervision"
+Assy3,"fixture, training, supervision"
+Assy4,"fixture, training, supervision"
+Assy5,Automation
+Assy6,Automation
+Assy7,data
+,
+,
+Recommendations:,
+Add an additional machine,
+Add more human resources,
+Improve process yield,
+Investigate further,
+Add fixture & tools,
+Improve training ,
+Collect more data to analyze,
+Standardize the work procedure,
+Strngthen supplier base,
+Find alternative material,
+Collect feedback from worker,
+Automate the process,
+Supervise the process,
+Perform preventive maintenance,

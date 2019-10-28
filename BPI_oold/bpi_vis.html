@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  font-family: Arial;
+  color: white;
+}
+
+.parent ~ .cchild {
+  display: none;
+}
+.open .parent ~ .cchild {
+  display: table-row;
+}
+.parent {
+  cursor: pointer;
+}
+tbody {
+  color: #212121;
+}
+.open {
+  background-color: #e6e6e6;
+}
+
+.open .cchild {
+  background-color: #999;
+  color: white;
+}
+.parent > *:last-child {
+  width: 5px;
+}
+.parent i {
+  transform: rotate(0deg);
+  transition: transform .3s cubic-bezier(.4,0,.2,1);
+  margin: -.5rem;
+  padding: .5rem;
+ 
+}
+.open .parent i {
+  transform: rotate(180deg)
+}
+
+
+
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 25px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+table, td {
+  border: 1px solid black;
+}
+</style>
+<script src="https://d3js.org/d3.v5.js" charset="utf-8"></script>
+
+</head>
+<body>
+
+<!-- <h1>Custom Range Slider</h1>
+<p>Drag the slider to display the current value.</p>
+
+
+Z: 
+  <input type="range" min="0" max="500" value="100" class="slider" id="sliderZ">
+  <p>Value: <span id="outputZ"></span></p> -->
+
+
+<script>
+
+  //console.log("start2")
+  var globalData;
+  
+
+// console.log(globalData[0].HPU)
+var slider = document.getElementById("sliderZ");
+var output = document.getElementById("outputZ");
+// output.innerHTML = slider.value;
+slider.oninput = function() {
+  output.innerHTML = this.value;
+  console.log(this.value);
+  var sliderval = this.value;
+  d3.csv("http://127.0.0.1:8000/test_bpi_data.csv").then(function(data) {
+    //window.alert("Hello2")
+    
+});
+  
+
+}
+
+// var sliderB = document.getElementById("myRangeB");
+// var outputB = document.getElementById("demoB");
+// outputB.innerHTML = sliderB.value;
+
+// sliderB.oninput = function() {
+//   outputB.innerHTML = this.value;
+// }
+
+// var sliderC = document.getElementById("myRangeC");
+// var outputC = document.getElementById("demoC");
+// outputC.innerHTML = sliderC.value;
+// sliderC.oninput = function() {
+//   outputC.innerHTML = this.value;
+// }
+
+// var sliderD = document.getElementById("myRangeD");
+// var outputD = document.getElementById("demoD");
+// outputD.innerHTML = sliderD.value;
+
+// sliderD.oninput = function() {
+//   outputD.innerHTML = this.value;
+// }
+
+
+</script>
+    <br>
+
+    <button  type="button" id="executeBtn" onclick="myFunction()">Run Iteration 1</button> 
+    <button  type="button" id="resetBtn" onclick="resetFunction()">Reset</button>
+    <button  type="button" id="togglePartTable" onclick="togglePartTable()">Show/Hide Part Table</button>
+    
+    <br>
+    <br>
+    <br>
+
+    <p> Enter alloted time ( for example : 1 for one day) </p>
+    <input name="searchTxt" type="text" maxlength="512" id="searchTxt" class="searchField"/>
+
+
+    <div class="container">
+    <table class="table" id="tableOp">
+        <tr>
+            <th>Op</th>
+            <th>Value</th>
+        </tr>
+
+        <tbody id="op10">
+        <tr class="parent">
+            <td>Op 10-100</td>
+            <td>Values</td>
+            <td><i class="fa fa-chevron-down"></i></td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 10</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 20</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 30</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 40</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 50</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 60</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 70</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 80</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 90</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 100</td>
+            <td colspan="1">0</td>
+        </tr>
+        
+        </tbody>
+        
+
+        <tbody id="op20">
+        <tr class="parent">
+            <td>Op 110-200</td>
+            <td>Values</td>
+            <td><i class="fa fa-chevron-down"></i></td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 110</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 120</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 130</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 140</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 150</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 160</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 170</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 180</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 190</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 200</td>
+            <td colspan="1">0</td>
+        </tr>
+        
+
+        </tbody>
+
+
+        <tbody id="op30">
+        <tr class="parent">
+            <td>Op 210-300</td>
+            <td>Values</td>
+            <td><i class="fa fa-chevron-down"></i></td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 210</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 220</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 230</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 240</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 250</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 260</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 270</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 280</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 290</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 300</td>
+            <td colspan="1">0</td>
+        </tr>
+        
+
+        </tbody>
+
+         <tbody id="op40">
+        <tr class="parent">
+            <td>Op 310-400</td>
+            <td>Values</td>
+            <td><i class="fa fa-chevron-down"></i></td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 310</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 320</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 330</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 340</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 350</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 360</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 370</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 380</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 390</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 400</td>
+            <td colspan="1">0</td>
+        </tr>
+        
+
+        </tbody>
+
+
+         <tbody id="op50">
+        <tr class="parent">
+            <td>Op 410-500</td>
+            <td>Values</td>
+            <td><i class="fa fa-chevron-down"></i></td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 410</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 420</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 430</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 440</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 450</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 460</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 470</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 480</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 490</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 500</td>
+            <td colspan="1">0</td>
+        </tr>
+        
+
+        </tbody>
+
+        <tbody id="op60">
+        <tr class="parent">
+            <td>Op 510-600</td>
+            <td>Values</td>
+            <td><i class="fa fa-chevron-down"></i></td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 510</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 520</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 530</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 540</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 550</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 560</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 570</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 580</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 590</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 600</td>
+            <td colspan="1">0</td>
+        </tr>
+        
+
+        </tbody>
+
+
+        <tbody id="op70">
+        <tr class="parent">
+            <td>Op 610-700</td>
+            <td>Values</td>
+            <td><i class="fa fa-chevron-down"></i></td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 610</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 620</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 630</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 640</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 650</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 660</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 670</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 680</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 690</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 700</td>
+            <td colspan="1">0</td>
+        </tr>
+        
+
+        </tbody>
+
+        <tbody id="op80">
+        <tr class="parent">
+            <td>Op 710-800</td>
+            <td>Values</td>
+            <td><i class="fa fa-chevron-down"></i></td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 710</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 720</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 730</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 740</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 750</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 760</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 770</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 780</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 790</td>
+            <td colspan="1">0</td>
+        </tr>
+        <tr class="cchild">
+            <td>Op 800</td>
+            <td colspan="1">0</td>
+        </tr>
+        
+
+        </tbody>
+    </table>
+
+    <table class="table" id="tablePart">
+        <tr>
+            <th>Part</th>
+            <th>Value</th>
+        </tr>
+
+        <tbody id="partAll">
+          
+      </tbody>
+    </table>
+
+
+</div>
+
+
+
+<br> 
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<link rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+<script>
+  $('table').on('click', 'tr.parent .fa-chevron-down', function(){
+  $(this).closest('tbody').toggleClass('open');
+  
+});
+
+var OpPartsMap = new Map();
+var OpNamesList = [];
+var OpMap = new Map();
+var PartsMap = new Map();
+
+var PartsNamesList = [];
+var currentOpNumber = 0
+var timeAlloted = 1;
+var currentTimeConsumed = 0
+var timeAlloted = 1
+var showPartTable = 1
+
+function resetFunction(){
+  document.getElementById("executeBtn").innerHTML = "Run Iteration 1";
+
+  for ( var itr = 0; itr<= currentOpNumber ; itr++)
+      {
+        console.log("Reseting " + itr)
+        getOpName = OpNamesList[itr].trim()
+        var value = PartsMap.get(getOpName)
+        var xItr = itr%10
+        if( itr < 10)
+        {
+          var tableDOMrow2 = document.getElementById("tableOp").tBodies.namedItem("op10").rows[1+Number(itr)].cells;
+          tableDOMrow2[0].innerHTML = getOpName
+          tableDOMrow2[1].innerHTML = 0;  
+        }
+        else if( itr < 20)
+        {
+         
+          var tableDOMrow2 = document.getElementById("tableOp").tBodies.namedItem("op20").rows[1+Number(xItr)].cells;
+          tableDOMrow2[0].innerHTML = getOpName
+          tableDOMrow2[1].innerHTML = 0;   
+        }
+        else if( itr < 30)
+        {
+          var tableDOMrow2 = document.getElementById("tableOp").tBodies.namedItem("op30").rows[1+Number(xItr)].cells;
+          tableDOMrow2[0].innerHTML = getOpName
+          tableDOMrow2[1].innerHTML = 0;   
+        }
+        else if( itr < 40)
+        {
+          var tableDOMrow2 = document.getElementById("tableOp").tBodies.namedItem("op40").rows[1+Number(xItr)].cells;
+          tableDOMrow2[0].innerHTML = getOpName
+          tableDOMrow2[1].innerHTML = 0;   
+        }
+        else if( itr < 50)
+        {
+          var tableDOMrow2 = document.getElementById("tableOp").tBodies.namedItem("op50").rows[1+Number(xItr)].cells;
+          tableDOMrow2[0].innerHTML = getOpName
+          tableDOMrow2[1].innerHTML = 0;   
+        }
+        else if( itr < 60)
+        {
+          var tableDOMrow2 = document.getElementById("tableOp").tBodies.namedItem("op60").rows[1+Number(xItr)].cells;
+          tableDOMrow2[0].innerHTML = getOpName
+          tableDOMrow2[1].innerHTML = 0;   
+        }
+        else if( itr < 70)
+        {
+          var tableDOMrow2 = document.getElementById("tableOp").tBodies.namedItem("op70").rows[1+Number(xItr)].cells;
+          tableDOMrow2[0].innerHTML = getOpName
+          tableDOMrow2[1].innerHTML = 0;   
+        }
+        else if( itr < 80)
+        {
+          var tableDOMrow2 = document.getElementById("tableOp").tBodies.namedItem("op80").rows[1+Number(xItr)].cells;
+          tableDOMrow2[0].innerHTML = getOpName
+          tableDOMrow2[1].innerHTML = 0;   
+        }
+      }
+      // finishedUptoX = 0
+      currentTimeConsumed = 0
+      currentOpNumber = 0
+
+}
+function myFunction() {
+  // var btn =  document.getElementById("executeBtn");
+  
+  // BuildPartTable()
+  var btn = document.getElementById("executeBtn");
+  if( btn.innerHTML == "Run Iteration 1"){
+    // resetFunction()
+    PartsNamesList = []
+    RunDay1()
+    document.getElementById("executeBtn").innerHTML= "Run Iteration 2";
+    
+  }
+  else if( btn.innerHTML == "Run Iteration 2"){
+    PartsNamesList = []
+    RunDayN("2")
+   document.getElementById("executeBtn").innerHTML= "Run Iteration 3";
+  }
+  else if( btn.innerHTML == "Run Iteration 3"){
+    PartsNamesList = []
+    RunDayN("3")
+   document.getElementById("executeBtn").innerHTML= "Run Iteration 4";
+  }
+  else if( btn.innerHTML == "Run Iteration 4"){
+    PartsNamesList = []
+    RunDayN("4")
+   document.getElementById("executeBtn").innerHTML= "Run Iteration 5";
+  }
+  else if( btn.innerHTML == "Run Iteration 5"){
+    PartsNamesList = []
+    RunDayN("5")
+   document.getElementById("executeBtn").innerHTML= "Run Iteration 6";
+  }
+  else if( btn.innerHTML == "Run Iteration 6"){
+    PartsNamesList = []
+    RunDayN("6")
+   document.getElementById("executeBtn").innerHTML= "Run Iteration 7";
+  }
+  else if( btn.innerHTML == "Run Iteration 7"){
+    PartsNamesList = []
+    RunDayN("7")
+   document.getElementById("executeBtn").innerHTML= "Run Iteration 8";
+  }
+  else if( btn.innerHTML == "Run Iteration 8"){
+    PartsNamesList = []
+    RunDayN("8")
+   document.getElementById("executeBtn").innerHTML= "Run Iteration 9";
+  }
+  else if( btn.innerHTML == "Run Iteration 9"){
+    PartsNamesList = []
+    RunDayN("9")
+   document.getElementById("executeBtn").innerHTML= "Run Iteration 10";
+  }
+  else if( btn.innerHTML == "Run Iteration 10"){
+    PartsNamesList = []
+    RunDayN("10")
+   document.getElementById("executeBtn").innerHTML= "Run Iteration 11";
+  }
+  else if( btn.innerHTML == "Run Iteration 11"){
+    PartsNamesList = []
+    RunDayN("11")
+   document.getElementById("executeBtn").innerHTML= "Run Iteration 12";
+  }
+  else if( btn.innerHTML == "Run Iteration 12"){
+    PartsNamesList = []
+    RunDayN("12")
+   document.getElementById("executeBtn").innerHTML= "All Done";
+  }
+  
+}
+
+function BuildOpPartsMapandOpList(data){
+  for (var i = 0; i<data.length; i++) {
+      var strParts = data[i].parts;
+      var arrParts = [];
+      arrParts = strParts.split(" ");
+      var opName = data[i].op;
+      OpPartsMap.set(opName, arrParts);
+      OpNamesList.push(opName);
+      // console.log(opName);
+      // console.log(OpPartsMap.get(opName));
+    }
+}
+function BuildOpMapandPartsMapwithList(data){
+  for (var i =0; i<data.length; i++)
+      {
+        if(data[i].Amount == "")
+        {
+          // console.log("Op Found")
+          var new_op_config = [];
+          new_op_config.push(data[i].day_8hrs);
+          new_op_config.push(data[i].FPY_PR_3);
+          var opName = data[i].Operations;
+          OpMap.set(opName, new_op_config);
+          
+          // console.log(opName);
+          // console.log(OpMap.get(opName))
+          // console.log(OpMap.get("op70"))
+        }
+        else
+        {
+          // console.log("Parts found")
+          var new_part_config = [];
+          new_part_config.push(data[i].Amount);
+          var partName = data[i].Operations;
+          PartsMap.set(partName, new_part_config);
+          PartsNamesList.push(partName);
+        }
+      }
+}
+
+function RunGenericDay(){
+      var timeConsumed = currentTimeConsumed;
+      // console.log(OpMap.get("op70"))
+      var finishedUptoX = currentOpNumber;
+      console.log("Current op " + currentOpNumber)
+      console.log("current time " + currentTimeConsumed + " current Time alloted "+ timeAlloted)
+
+      for (var x = currentOpNumber; x<OpNamesList.length; x++)
+      {
+        var getOpName = (OpNamesList[x]).trim();
+        var getOpConfig = OpMap.get(getOpName);
+
+        // console.log(getOpName)
+        console.log("Op config " + getOpConfig)
+
+        if ( timeConsumed + Number(getOpConfig[0]) > timeAlloted)
+        {
+          finishedUptoX = x-1;
+          break;
+        }
+        else
+        {
+          currentOpNumber = x
+          console.log("Processing------------");
+          console.log(" OP Name " + getOpName);
+          // console.log(getOpConfig);
+
+          timeConsumed = timeConsumed + Number(getOpConfig[0]);
+          // console.log(getOpName);
+          console.log("Time " + timeConsumed)
+          // console.log(OpPartsMap.get(getOpName))
+          var getPartsArray = [];
+          getPartsArray =  OpPartsMap.get(getOpName);
+          // console.log(getPartsArray);
+          // console.log("Length : " + getPartsArray.length)
+          var partsValueArray = []
+          for (var ind = 0; ind<getPartsArray.length; ind++)
+          {
+              // console.log(getPartsArray[ind])
+              var get_part_config = PartsMap.get(getPartsArray[ind]);
+              // console.log(get_part_config);
+              partsValueArray.push(Number(PartsMap.get(getPartsArray[ind])[0]));
+          }
+          // var minVal = Math.min(partsValueArray);
+          console.log(partsValueArray)
+          var argMinIndex = partsValueArray.indexOf(Math.min.apply(Math, partsValueArray));
+          var new_op_output = []
+          console.log(argMinIndex)
+          new_op_output.push((Number(partsValueArray[argMinIndex]) * Number(getOpConfig[1])).toString())
+          PartsMap.set(getOpName, new_op_output);
+          console.log(PartsMap.get(getOpName));
+        }
+      }
+
+      for ( var itr = 0; itr<= finishedUptoX ; itr++)
+      {
+        getOpName = OpNamesList[itr].trim()
+        var value = PartsMap.get(getOpName)
+        value = Math.floor(Number(value))
+        var xItr = itr%10
+        if( itr < 10)
+        {
+          var tableDOMrow2 = document.getElementById("tableOp").tBodies.namedItem("op10").rows[1+Number(itr)].cells;
+          tableDOMrow2[0].innerHTML = getOpName
+          tableDOMrow2[1].innerHTML = value;  
+        }
+        else if( itr < 20)
+        {
+         
+          var tableDOMrow2 = document.getElementById("tableOp").tBodies.namedItem("op20").rows[1+Number(xItr)].cells;
+          tableDOMrow2[0].innerHTML = getOpName
+          tableDOMrow2[1].innerHTML = value;   
+        }
+        else if( itr < 30)
+        {
+          var tableDOMrow2 = document.getElementById("tableOp").tBodies.namedItem("op30").rows[1+Number(xItr)].cells;
+          tableDOMrow2[0].innerHTML = getOpName
+          tableDOMrow2[1].innerHTML = value;   
+        }
+        else if( itr < 40)
+        {
+          var tableDOMrow2 = document.getElementById("tableOp").tBodies.namedItem("op40").rows[1+Number(xItr)].cells;
+          tableDOMrow2[0].innerHTML = getOpName
+          tableDOMrow2[1].innerHTML = value;   
+        }
+        else if( itr < 50)
+        {
+          var tableDOMrow2 = document.getElementById("tableOp").tBodies.namedItem("op50").rows[1+Number(xItr)].cells;
+          tableDOMrow2[0].innerHTML = getOpName
+          tableDOMrow2[1].innerHTML = value;   
+        }
+        else if( itr < 60)
+        {
+          var tableDOMrow2 = document.getElementById("tableOp").tBodies.namedItem("op60").rows[1+Number(xItr)].cells;
+          tableDOMrow2[0].innerHTML = getOpName
+          tableDOMrow2[1].innerHTML = value;   
+        }
+        else if( itr < 70)
+        {
+          var tableDOMrow2 = document.getElementById("tableOp").tBodies.namedItem("op70").rows[1+Number(xItr)].cells;
+          tableDOMrow2[0].innerHTML = getOpName
+          tableDOMrow2[1].innerHTML = value;   
+        }
+        else if( itr < 80)
+        {
+          var tableDOMrow2 = document.getElementById("tableOp").tBodies.namedItem("op80").rows[1+Number(xItr)].cells;
+          tableDOMrow2[0].innerHTML = getOpName
+          tableDOMrow2[1].innerHTML = value;   
+        }
+      }
+      currentTimeConsumed = timeConsumed
+      timeAlloted = timeAlloted + 1
+}
+
+function togglePartTable(){
+  if( showPartTable )
+  {
+    BuildPartTable()
+    showPartTable = 0
+  }
+  else
+  {
+    DeletePartTable()
+    showPartTable = 1
+  }
+}
+function BuildPartTable(){
+  var table = document.getElementById("tablePart").tBodies.namedItem("partAll");
+  // var parentRow = table.rows[0]
+
+  console.log("Adding rows " + PartsNamesList.length)
+
+  for( var itr = 0 ; itr < PartsNamesList.length ; itr++)
+  {
+    var getPartName = PartsNamesList[itr]
+    var get_part_config = PartsMap.get(getPartName)
+    var row = table.insertRow(itr)
+  
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    cell1.innerHTML = getPartName;
+    cell2.innerHTML = get_part_config[0];
+  }
+  
+}
+
+function DeletePartTable(){
+  console.log("deleting table")
+   var table = document.getElementById("tablePart").tBodies.namedItem("partAll");
+
+  for(var i = table.rows.length - 1; i > -1; i--)
+  {
+      table.deleteRow(i);
+  }
+  // $("#tablePart partAll tr").remove();
+}
+
+function RunDay1(){
+
+  d3.dsv("|", "http://127.0.0.1:8000/input_final.txt").then(function(data){
+
+    
+    timeAlloted = Number(document.getElementById("searchTxt").value);
+    if(timeAlloted == 0)
+    {
+      timeAlloted = 1;
+    }
+    console.log(timeAlloted)
+    
+    BuildOpPartsMapandOpList(data);
+
+    d3.csv("http://127.0.0.1:8000/Day_1.csv").then(function(data) {
+      //window.alert("Hello2")
+      
+      BuildOpMapandPartsMapwithList(data)
+
+      RunGenericDay()
+
+    });
+  });
+}
+
+
+
+function RunDayN(dayNumber){
+  d3.dsv("|", "http://127.0.0.1:8000/input_final.txt").then(function(data){
+    
+    BuildOpPartsMapandOpList(data);
+
+    d3.csv("http://127.0.0.1:8000/Day_" + Number(dayNumber) + ".csv").then(function(data) {
+      //window.alert("Hello2")
+      
+      BuildOpMapandPartsMapwithList(data)
+
+      RunGenericDay()
+
+    });
+  });
+}
+
+</script>
+  </div>
+</div>
+     
+</body>
+</html> 

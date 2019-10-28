@@ -1,0 +1,4 @@
+op1 A B B
+op2 op1 C D
+op3 op2 E E
+z op3
